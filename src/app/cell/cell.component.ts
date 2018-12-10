@@ -24,4 +24,8 @@ export class CellComponent implements OnInit {
     }
     return '';
   }
+
+  userClick() {
+    this.setMark(Mark.X);
+  }
 }

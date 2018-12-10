@@ -33,4 +33,10 @@ describe('CellComponent', () => {
     fixture.detectChanges();
     expect(cellEl.nativeElement.textContent.trim()).toEqual('X');
   });
+
+  it('should show mark after user click', () => {
+    cellEl.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(cellEl.nativeElement.textContent.trim()).toEqual('X');
+  });
 });
