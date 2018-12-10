@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Mark} from '../mark';
+import { PlayerTurnService } from 'src/app/player-turn.service';
 
 @Component({
   selector: 'app-cell',
@@ -9,7 +10,7 @@ import {Mark} from '../mark';
 export class CellComponent implements OnInit {
   mark?: Mark = null;
 
-  constructor() {}
+  constructor(public playerTurnService: PlayerTurnService) {}
 
   ngOnInit() {
   }
@@ -26,6 +27,7 @@ export class CellComponent implements OnInit {
   }
 
   userClick() {
-    this.setMark(Mark.X);
+    this.setMark(this.playerTurnService.getCurrentMark());
+    this.playerTurnService.endTurn();
   }
 }

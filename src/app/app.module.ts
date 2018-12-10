@@ -7,6 +7,7 @@ import { CellRowComponent } from './cell-row/cell-row.component';
 import { GameService } from './game.service';
 import { GameServiceStub } from '../testing/game-service.stub';
 import { CellGridComponent } from './cell-grid/cell-grid.component';
+import { PlayerTurnService } from './player-turn.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,10 @@ import { CellGridComponent } from './cell-grid/cell-grid.component';
   imports: [
     BrowserModule
   ],
-  providers: [{provide: GameService, useValue: new GameServiceStub()}],
+  providers: [
+    {provide: GameService, useValue: new GameServiceStub()},
+    {provide: PlayerTurnService, useValue: new PlayerTurnService()}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
