@@ -2,5 +2,6 @@ import { Cell } from './cell';
 
 export class Row {
     rank: number;
-    cells: Cell[];
+    // FIXME: this should be dynamic
+    cells = [new Cell(), new Cell(), new Cell()];
 }

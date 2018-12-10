@@ -1,7 +1,9 @@
 .grid-cell {
     border-style: solid;
     height: 3.2vw;
+    min-height: 3.2vw;
     width: 3.2vw;
+    min-width: 3.2vw;
     font-size: 2.5em;
     text-align: center;
     line-height: 3.2vw;

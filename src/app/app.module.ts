@@ -6,12 +6,14 @@ import { CellComponent } from './cell/cell.component';
 import { CellRowComponent } from './cell-row/cell-row.component';
 import { GameService } from './game.service';
 import { GameServiceStub } from '../testing/game-service.stub';
+import { CellGridComponent } from './cell-grid/cell-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CellComponent,
-    CellRowComponent
+    CellRowComponent,
+    CellGridComponent
   ],
   imports: [
     BrowserModule
