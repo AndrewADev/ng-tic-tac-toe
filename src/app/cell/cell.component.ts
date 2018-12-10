@@ -15,8 +15,12 @@ export class CellComponent implements OnInit {
   ngOnInit() {
   }
 
-  setMark(mark: Mark) {
-    this.mark = mark;
+  setMark(mark: Mark): Boolean {
+    if (this.mark == null) {
+      this.mark = mark;
+      return true;
+    }
+    return false;
   }
 
   getMark(): string {
@@ -27,7 +31,8 @@ export class CellComponent implements OnInit {
   }
 
   userClick() {
-    this.setMark(this.playerTurnService.getCurrentMark());
-    this.playerTurnService.endTurn();
+    if (this.setMark(this.playerTurnService.getCurrentMark())) {
+      this.playerTurnService.endTurn();
+    }
   }
 }
