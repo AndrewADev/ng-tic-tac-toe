@@ -21,7 +21,7 @@ describe('CellComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CellComponent);
     component = fixture.componentInstance;
-    cellEl = fixture.debugElement.query(By.css('td'));
+    cellEl = fixture.debugElement.query(By.css('.grid-cell'));
   });
 
   it('should create', () => {
