@@ -4,7 +4,7 @@ import { CellComponent } from './cell.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import {Mark} from '../mark';
+import {Mark} from '../shared/mark';
 import { PlayerTurnService } from '../player-turn.service';
 
 describe('CellComponent', () => {

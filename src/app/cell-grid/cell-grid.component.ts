@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
-import { Row } from '../row';
+import { Row } from '../shared/row';
 
 @Component({
   selector: 'app-cell-grid',

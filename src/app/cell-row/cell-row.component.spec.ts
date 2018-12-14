@@ -6,6 +6,8 @@ import { CellComponent } from '../cell/cell.component';
 import { GameServiceStub } from '../../testing/game-service.stub';
 import { GameService } from '../game.service';
 import { By } from '@angular/platform-browser';
+import { Cell } from '../shared/cell';
+import { Mark } from '../shared/mark';
 
 describe('CellRowComponent', () => {
   let component: CellRowComponent;

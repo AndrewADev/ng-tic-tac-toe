@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Mark} from '../mark';
+import {Mark} from '../shared/mark';
 import { PlayerTurnService } from 'src/app/player-turn.service';
 
 @Component({
