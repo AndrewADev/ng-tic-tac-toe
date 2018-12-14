@@ -23,7 +23,6 @@ describe('CellRowComponent', () => {
     const cell = new Cell();
     cell.mark = Mark.O;
 
-    // const fixedService = new GameServiceStub();
     sut.cells = [
       cell,
       Object.create(cell),
