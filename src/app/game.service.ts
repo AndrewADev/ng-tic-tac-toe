@@ -25,7 +25,7 @@ export class GameService {
   }
 
   checkForWinConditions() {
-    if (this.rows.reduce((accum, row) => accum || row.hasWinCondition)) {
+    if (this.hasRowWinCondition) {
       this.mode = GameMode.ENDED;
     }
   }
@@ -36,5 +36,9 @@ export class GameService {
 
   get hasGameEnded(): Boolean {
     return this.mode.valueOf() === GameMode.ENDED;
+  }
+
+  private get hasRowWinCondition(): Boolean {
+    return this.rows.reduce((accum, row) => accum || row.hasWinCondition);
   }
 }

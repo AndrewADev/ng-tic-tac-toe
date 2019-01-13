@@ -4,6 +4,7 @@ import { GameService } from './game.service';
 import { Cell } from './shared/cell';
 import { Row } from './shared/row';
 import { PlayerTurnService } from './player-turn.service';
+import { Mark } from './shared/mark';
 
 describe('GameService', () => {
   const mockPlayerTurnService = {
@@ -46,6 +47,21 @@ describe('GameService', () => {
       new Row(),
       winningRow,
       new Row()
+    ];
+    service.checkForWinConditions();
+    expect(service.hasGameEnded).toBeTruthy();
+  }));
+
+  it('should detect column win condition', inject([GameService], (service: GameService) => {
+    const markedCell = new Cell();
+    markedCell.mark = Mark.O;
+    const firstIdxRow = new Row();
+    firstIdxRow.cells = [ markedCell, new Cell(), new Cell()];
+
+    service.rows = [
+      {...firstIdxRow},
+      {...firstIdxRow},
+      {...firstIdxRow}
     ];
     service.checkForWinConditions();
     expect(service.hasGameEnded).toBeTruthy();

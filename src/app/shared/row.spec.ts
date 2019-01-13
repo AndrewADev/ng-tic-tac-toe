@@ -19,14 +19,27 @@ describe('CellRowComponent', () => {
     expect(sut.hasWinCondition).toBeFalsy();
   });
 
+  it('should return false for mixed row contents', () => {
+    const oCell = new Cell();
+    oCell.mark = Mark.O;
+    const xCell = new Cell();
+    xCell.mark = Mark.X;
+    sut.cells = [
+      oCell,
+      xCell,
+      {...oCell}
+    ];
+    expect(sut.hasWinCondition).toBeFalsy();
+  });
+
   it('should detect row win condition', () => {
     const cell = new Cell();
     cell.mark = Mark.O;
 
     sut.cells = [
       cell,
-      Object.create(cell),
-      Object.create(cell)
+      Object.assign(cell, {mark: Mark.O}),
+      Object.assign(cell, {mark: Mark.O})
     ];
 
     expect(sut.hasWinCondition).toBeTruthy();
