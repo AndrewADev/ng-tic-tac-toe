@@ -39,6 +39,11 @@ describe('GameService', () => {
     expect(service.hasGameEnded).toBeFalsy();
   }));
 
+  it('should not end game when no win condition present', inject([GameService], (service: GameService) => {
+    service.checkForWinConditions();
+    expect(service.hasGameEnded).toBeFalsy();
+  }));
+
   it('should end game when win condition detected', inject([GameService], (service: GameService) => {
     const winningRow = {
       hasWinCondition: true

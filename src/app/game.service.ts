@@ -15,12 +15,8 @@ export class GameService {
     this.turnService.addTurnChangeCallback(this.checkForWinConditions);
   }
 
-  getCells(): Cell[] {
-    return [];
-  }
-
   getRows(): Row[] {
-    return [];
+    return this.rows;
   }
 
   checkForWinConditions() {

@@ -6,8 +6,6 @@ export class GameServiceStub {
 
     getRows(): Row[] { return [new Row(), new Row(), new Row()]; }
 
-    getCells(): Cell[] { return this.cells; }
-
     get boardDimension(): Number {
         return 3;
     }
