@@ -8,7 +8,6 @@ import { PlayerTurnService } from './player-turn.service';
   providedIn: 'root'
 })
 export class GameService {
-  cells = [];
   rows = [];
   private mode: GameMode = GameMode.LOBBY;
 
@@ -25,20 +24,31 @@ export class GameService {
   }
 
   checkForWinConditions() {
-    if (this.hasRowWinCondition) {
+    if (this.hasRowWinCondition || this.hasColWinCondition) {
       this.mode = GameMode.ENDED;
     }
   }
 
   get boardDimension(): Number {
-    return this.cells.length;
+    return this.rows[0] && this.rows[0].cells ? this.rows[0].cells.length : 0;
   }
 
   get hasGameEnded(): Boolean {
     return this.mode.valueOf() === GameMode.ENDED;
   }
 
+  private get hasColWinCondition(): Boolean {
+    const maxIdx: Number = Math.max(+this.boardDimension - 1, 0);
+    for (let i = 0; i < maxIdx; i++) {
+      const initialMark = this.rows[0].cells[i].mark;
+      if (this.rows.every(row => row && row.cells[i].mark.valueOf() === initialMark.valueOf())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private get hasRowWinCondition(): Boolean {
-    return this.rows.reduce((accum, row) => accum || row.hasWinCondition);
+    return this.rows.reduce((accum, row) => accum || row.hasWinCondition, false);
   }
 }

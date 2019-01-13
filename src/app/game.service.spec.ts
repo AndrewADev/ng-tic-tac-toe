@@ -25,7 +25,7 @@ describe('GameService', () => {
   }));
 
   it('should return board dimension', inject([GameService], (service: GameService) => {
-    service.cells = [new Cell(), new Cell(), new Cell()];
+    service.rows = [new Row(), new Row(), new Row()];
     expect(service.boardDimension).toEqual(3);
   }));
 
