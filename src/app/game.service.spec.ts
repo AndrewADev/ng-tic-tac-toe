@@ -3,11 +3,19 @@ import { TestBed, inject } from '@angular/core/testing';
 import { GameService } from './game.service';
 import { Cell } from './shared/cell';
 import { Row } from './shared/row';
+import { PlayerTurnService } from './player-turn.service';
 
 describe('GameService', () => {
+  const mockPlayerTurnService = {
+    addTurnChangeCallback( callback ) {},
+  };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GameService]
+      providers: [
+        GameService,
+        {provide: PlayerTurnService, useValue: mockPlayerTurnService}
+      ]
     });
   });
 
@@ -18,6 +26,12 @@ describe('GameService', () => {
   it('should return board dimension', inject([GameService], (service: GameService) => {
     service.cells = [new Cell(), new Cell(), new Cell()];
     expect(service.boardDimension).toEqual(3);
+  }));
+
+  it('should register with turn service on init', inject([GameService], (service: GameService) => {
+    spyOn(mockPlayerTurnService, 'addTurnChangeCallback');
+    const sut = new GameService(mockPlayerTurnService as PlayerTurnService);
+    expect(mockPlayerTurnService.addTurnChangeCallback).toHaveBeenCalled();
   }));
 
   it('should indicate game not ended by default', inject([GameService], (service: GameService) => {
