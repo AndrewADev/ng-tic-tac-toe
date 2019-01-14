@@ -8,13 +8,15 @@ import { GameService } from './game.service';
 import { GameServiceStub } from '../testing/game-service.stub';
 import { CellGridComponent } from './cell-grid/cell-grid.component';
 import { PlayerTurnService } from './player-turn.service';
+import { GameStatusDashboardComponent } from './game-status-dashboard/game-status-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CellComponent,
     CellRowComponent,
-    CellGridComponent
+    CellGridComponent,
+    GameStatusDashboardComponent
   ],
   imports: [
     BrowserModule
