@@ -11,6 +11,14 @@ import { Mark } from '../shared/mark';
 import { Component, Host } from '@angular/core';
 
 describe('CellRowComponent', () => {
+  @Component({
+    selector: 'app-host-component',
+    template: `  <app-cell-row [cells]="cells"></app-cell-row>`
+  })
+  class HostComponent {
+    cells = [new Cell(), new Cell(), new Cell()];
+  }
+
   let component: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
   const gameServiceStub = new GameServiceStub();
@@ -46,11 +54,4 @@ describe('CellRowComponent', () => {
     expect(cellEls.length).toEqual(3);
   });
 
-  @Component({
-    selector: 'app-host-component',
-    template: `  <app-cell-row [cells]="cells"></app-cell-row>`
-  })
-  class HostComponent {
-    cells = [new Cell(), new Cell(), new Cell()];
-  }
 });

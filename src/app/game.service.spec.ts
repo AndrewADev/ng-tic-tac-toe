@@ -10,8 +10,10 @@ describe('GameService', () => {
   const mockPlayerTurnService = {
     addTurnChangeCallback( callback ) {},
   };
+  const markedCell = new Cell();
 
   beforeEach(() => {
+    markedCell.mark = Mark.O;
     TestBed.configureTestingModule({
       providers: [
         GameService,
@@ -58,8 +60,6 @@ describe('GameService', () => {
   }));
 
   it('should detect column win condition', inject([GameService], (service: GameService) => {
-    const markedCell = new Cell();
-    markedCell.mark = Mark.O;
     const firstIdxRow = new Row();
     firstIdxRow.cells = [ markedCell, new Cell(), new Cell()];
 
@@ -71,4 +71,33 @@ describe('GameService', () => {
     service.checkForWinConditions();
     expect(service.hasGameEnded).toBeTruthy();
   }));
+
+  const firstMarkedRow = [ markedCell, new Cell(), new Cell()];
+  const midMarkedRow = [new Cell(), markedCell, new Cell()];
+  const lastMarkedRow = [new Cell(), new Cell(), markedCell];
+
+  const diagCases = [
+    {
+      name: 'downward',
+      data: [
+        {cells: firstMarkedRow},
+        {cells: midMarkedRow},
+        {cells: lastMarkedRow}
+      ]
+    }, {
+      name: 'upward',
+      data: [
+        {cells: lastMarkedRow},
+        {cells: midMarkedRow},
+        {cells: firstMarkedRow}
+      ]
+    }
+  ];
+  diagCases.forEach( testCase => {
+    it(`should detect diagonal win condition (${testCase.name})`, inject([GameService], (service: GameService) => {
+      service.rows = testCase.data;
+      service.checkForWinConditions();
+      expect(service.hasGameEnded).toBeTruthy();
+    }));
+  });
 });
