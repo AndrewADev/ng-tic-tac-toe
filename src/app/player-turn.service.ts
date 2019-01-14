@@ -16,7 +16,8 @@ export class PlayerTurnService {
       mark: Mark.O
     }
   ];
-  activeIdx = 0;
+  private activeIdx = 0;
+  private gameOver = false;
 
   private endTurnCallback: () => void = () => {};
 
@@ -34,8 +35,16 @@ export class PlayerTurnService {
     return this.players[this.activeIdx].mark;
   }
 
+  get isGameActive() {
+    return !this.gameOver;
+  }
+
   endTurn() {
     this.endTurnCallback();
     this.activeIdx = (this.activeIdx === 0) ? 1 : 0;
+  }
+
+  endGame() {
+    this.gameOver = true;
   }
 }

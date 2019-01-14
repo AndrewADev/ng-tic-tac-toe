@@ -16,7 +16,7 @@ export class CellComponent implements OnInit {
   }
 
   setMark(mark: Mark): Boolean {
-    if (this.mark == null) {
+    if (this.mark == null && this.playerTurnService.isGameActive) {
       this.mark = mark;
       return true;
     }

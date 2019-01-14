@@ -22,6 +22,7 @@ export class GameService {
   checkForWinConditions() {
     if (this.hasRowWinCondition || this.hasColWinCondition || this.hasDiagonalWinCondition) {
       this.mode = GameMode.ENDED;
+      this.turnService.endGame();
     }
   }
 

@@ -51,6 +51,15 @@ describe('CellComponent', () => {
     expect(cellEl.nativeElement.textContent.trim()).toEqual(firstVal);
   });
 
+  it('should not allow seting mark after game over', () => {
+    const firstVal = cellEl.nativeElement.textContent.trim();
+    playerTurnService.endGame();
+    fixture.detectChanges();
+    component.setMark(Mark.O);
+    fixture.detectChanges();
+    expect(cellEl.nativeElement.textContent.trim()).toEqual(firstVal);
+  });
+
   it('should not end turn if mark not updated', () => {
     cellEl.triggerEventHandler('click', null);
     fixture.detectChanges();

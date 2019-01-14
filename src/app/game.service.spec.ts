@@ -9,6 +9,7 @@ import { Mark } from './shared/mark';
 describe('GameService', () => {
   const mockPlayerTurnService = {
     addTurnChangeCallback( callback ) {},
+    endGame() {},
   };
   const markedCell = new Cell();
 
@@ -46,10 +47,10 @@ describe('GameService', () => {
     expect(service.hasGameEnded).toBeFalsy();
   }));
 
+  const winningRow = {
+    hasWinCondition: true
+  };
   it('should end game when win condition detected', inject([GameService], (service: GameService) => {
-    const winningRow = {
-      hasWinCondition: true
-    };
     service.rows = [
       new Row(),
       winningRow,
@@ -58,6 +59,18 @@ describe('GameService', () => {
     service.checkForWinConditions();
     expect(service.hasGameEnded).toBeTruthy();
   }));
+
+  it('should notify turn service that turn has ended', () => {
+    spyOn(mockPlayerTurnService, 'endGame');
+    const sut = new GameService(mockPlayerTurnService as PlayerTurnService);
+    sut.rows = [
+      new Row(),
+      winningRow,
+      new Row()
+    ];
+    sut.checkForWinConditions();
+    expect(mockPlayerTurnService.endGame).toHaveBeenCalled();
+  });
 
   const firstMarkedRow = [ markedCell, new Cell(), new Cell()];
   const midMarkedRow = [new Cell(), markedCell, new Cell()];
