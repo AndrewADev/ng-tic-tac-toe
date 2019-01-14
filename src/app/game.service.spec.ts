@@ -59,22 +59,43 @@ describe('GameService', () => {
     expect(service.hasGameEnded).toBeTruthy();
   }));
 
-  it('should detect column win condition', inject([GameService], (service: GameService) => {
-    const firstIdxRow = new Row();
-    firstIdxRow.cells = [ markedCell, new Cell(), new Cell()];
-
-    service.rows = [
-      {...firstIdxRow},
-      {...firstIdxRow},
-      {...firstIdxRow}
-    ];
-    service.checkForWinConditions();
-    expect(service.hasGameEnded).toBeTruthy();
-  }));
-
   const firstMarkedRow = [ markedCell, new Cell(), new Cell()];
   const midMarkedRow = [new Cell(), markedCell, new Cell()];
   const lastMarkedRow = [new Cell(), new Cell(), markedCell];
+
+  const colCases = [
+    {
+      name: 'first',
+      data: [
+        {cells: firstMarkedRow},
+        {cells: firstMarkedRow},
+        {cells: firstMarkedRow},
+      ]
+    },
+    {
+      name: 'middle',
+      data: [
+        {cells: midMarkedRow},
+        {cells: midMarkedRow},
+        {cells: midMarkedRow},
+      ]
+    },
+    {
+      name: 'last',
+      data: [
+        {cells: lastMarkedRow},
+        {cells: lastMarkedRow},
+        {cells: lastMarkedRow},
+      ]
+    },
+  ];
+  colCases.forEach(testCase => {
+    it(`should detect column win condition (${testCase.name})`, inject([GameService], (service: GameService) => {
+      service.rows = testCase.data;
+      service.checkForWinConditions();
+      expect(service.hasGameEnded).toBeTruthy();
+    }));
+  });
 
   const diagCases = [
     {
