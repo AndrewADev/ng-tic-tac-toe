@@ -1,2 +1,2 @@
 # ng-tic-tac-toe
-Simple tic-tac-toe in Angular. It mostly works by this point, though with absolutely zero frills (currently no win detection, for instance).
+Simple tic-tac-toe in Angular. Should detect win conditions. Presently assumes two players playing on the same device and browser session.
