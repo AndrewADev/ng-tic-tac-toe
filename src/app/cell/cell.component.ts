@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Mark} from '../shared/mark';
 import { PlayerTurnService } from 'src/app/player-turn.service';
+import { Cell } from '../shared/cell';
 
 @Component({
   selector: 'app-cell',
@@ -10,22 +11,24 @@ import { PlayerTurnService } from 'src/app/player-turn.service';
 export class CellComponent implements OnInit {
   mark?: Mark = null;
 
+  @Input() cell: Cell;
+
   constructor(public playerTurnService: PlayerTurnService) {}
 
   ngOnInit() {
   }
 
   setMark(mark: Mark): Boolean {
-    if (this.mark == null) {
-      this.mark = mark;
+    if (!this.cell.hasMark && this.playerTurnService.isGameActive) {
+      this.cell.mark = mark;
       return true;
     }
     return false;
   }
 
   getMark(): string {
-    if (this.mark !== null) {
-      return this.mark.valueOf() === Mark.X ? 'X' : 'O';
+    if (this.cell.hasMark) {
+      return this.cell.mark.valueOf() === Mark.X ? 'X' : 'O';
     }
     return '';
   }

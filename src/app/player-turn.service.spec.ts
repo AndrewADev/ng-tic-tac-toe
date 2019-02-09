@@ -24,4 +24,11 @@ describe('PlayerTurnService', () => {
     service.endTurn();
     expect(service.getCurrentMark()).not.toEqual(initialPlayer);
   }));
+
+  it('should call turnChange callback on endTurn()', inject([PlayerTurnService], (service: PlayerTurnService) => {
+    const spyCallback = jasmine.createSpy('callback');
+    service.addTurnChangeCallback(spyCallback);
+    service.endTurn();
+    expect(spyCallback).toHaveBeenCalled();
+  }));
 });

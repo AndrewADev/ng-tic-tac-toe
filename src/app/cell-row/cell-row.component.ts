@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GameService } from '../game.service';
 
 import { Cell } from '../shared/cell';
@@ -8,18 +8,7 @@ import { Cell } from '../shared/cell';
   templateUrl: './cell-row.component.html',
   styleUrls: ['./cell-row.component.css']
 })
-export class CellRowComponent implements OnInit {
+export class CellRowComponent {
 
-  cells: Cell[];
-
-  constructor(public gameService: GameService) { }
-
-  ngOnInit() {
-    this.getCells();
-  }
-
-  getCells(): void {
-    this.cells = this.gameService.getCells();
-  }
-
+  @Input() cells: Cell[];
 }

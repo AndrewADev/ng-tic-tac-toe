@@ -8,10 +8,19 @@ import { GameService } from '../game.service';
 import { By } from '@angular/platform-browser';
 import { Cell } from '../shared/cell';
 import { Mark } from '../shared/mark';
+import { Component, Host } from '@angular/core';
 
 describe('CellRowComponent', () => {
-  let component: CellRowComponent;
-  let fixture: ComponentFixture<CellRowComponent>;
+  @Component({
+    selector: 'app-host-component',
+    template: `  <app-cell-row [cells]="cells"></app-cell-row>`
+  })
+  class HostComponent {
+    cells = [new Cell(), new Cell(), new Cell()];
+  }
+
+  let component: HostComponent;
+  let fixture: ComponentFixture<HostComponent>;
   const gameServiceStub = new GameServiceStub();
   let cellEls;
 
@@ -19,7 +28,8 @@ describe('CellRowComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         CellComponent,
-        CellRowComponent
+        CellRowComponent,
+        HostComponent
       ],
       providers: [
         {provide: GameService, useValue: gameServiceStub }
@@ -29,7 +39,7 @@ describe('CellRowComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CellRowComponent);
+    fixture = TestBed.createComponent(HostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 
@@ -40,7 +50,8 @@ describe('CellRowComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it ('should create one cell element for each returned from service', () => {
+  it ('should create one cell element for each passed from parent', () => {
     expect(cellEls.length).toEqual(3);
   });
+
 });

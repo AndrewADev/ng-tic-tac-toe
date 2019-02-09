@@ -5,7 +5,7 @@ import { Mark } from './mark';
 
 
 describe('Cell model', () => {
-  let cell;
+  let cell: Cell;
   beforeEach(() => {
     cell = new Cell();
   });

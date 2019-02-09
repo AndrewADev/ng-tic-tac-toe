@@ -5,6 +5,7 @@ import { Mark } from './shared/mark';
   providedIn: 'root'
 })
 export class PlayerTurnService {
+  // FIXME: types for these
   players = [
     {
       name: 'Player 1',
@@ -15,9 +16,16 @@ export class PlayerTurnService {
       mark: Mark.O
     }
   ];
-  activeIdx = 0;
+  private activeIdx = 0;
+  private gameOver = false;
+
+  private endTurnCallback: () => void = () => {};
 
   constructor() { }
+
+  addTurnChangeCallback(callback: () => void) {
+    this.endTurnCallback = callback;
+  }
 
   getCurrentPlayerName() {
     return this.players[this.activeIdx].name;
@@ -27,7 +35,16 @@ export class PlayerTurnService {
     return this.players[this.activeIdx].mark;
   }
 
+  get isGameActive() {
+    return !this.gameOver;
+  }
+
   endTurn() {
+    this.endTurnCallback();
     this.activeIdx = (this.activeIdx === 0) ? 1 : 0;
+  }
+
+  endGame() {
+    this.gameOver = true;
   }
 }
