@@ -1,13 +1,22 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { CellComponent } from './cell.component';
-import { DebugElement } from '@angular/core';
+import { DebugElement, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import {Mark} from '../shared/mark';
 import { PlayerTurnService } from '../player-turn.service';
+import { Cell } from '../shared/cell';
 
 describe('CellComponent', () => {
+  @Component({
+    selector: 'app-host-component',
+    template: `  <app-cell [cell]="cell"></app-cell>`
+  })
+  class HostComponent {
+    cell = new Cell();
+  }
+
   let component: CellComponent;
   let fixture: ComponentFixture<CellComponent>;
   let cellEl: DebugElement;
@@ -23,6 +32,7 @@ describe('CellComponent', () => {
 
     fixture = TestBed.createComponent(CellComponent);
     component = fixture.componentInstance;
+    component.cell = new Cell();
 
     playerTurnService = fixture.debugElement.injector.get(PlayerTurnService);
     endTurnSpy = spyOn(playerTurnService, 'endTurn').and.callThrough();

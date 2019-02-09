@@ -1,4 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
+import * as TypeMoq from 'typemoq';
 
 import { GameService } from './game.service';
 import { Cell } from './shared/cell';
@@ -47,13 +48,13 @@ describe('GameService', () => {
     expect(service.hasGameEnded).toBeFalsy();
   }));
 
-  const winningRow = {
-    hasWinCondition: true
-  };
+  const winningRow = TypeMoq.Mock.ofType<Row>();
+  winningRow.setup(x => x.hasWinCondition).returns((): Boolean => true);
+
   it('should end game when win condition detected', inject([GameService], (service: GameService) => {
     service.rows = [
       new Row(),
-      winningRow,
+      winningRow.object,
       new Row()
     ];
     service.checkForWinConditions();
@@ -65,7 +66,7 @@ describe('GameService', () => {
     const sut = new GameService(mockPlayerTurnService as PlayerTurnService);
     sut.rows = [
       new Row(),
-      winningRow,
+      winningRow.object,
       new Row()
     ];
     sut.checkForWinConditions();
@@ -80,25 +81,25 @@ describe('GameService', () => {
     {
       name: 'first',
       data: [
-        {cells: firstMarkedRow},
-        {cells: firstMarkedRow},
-        {cells: firstMarkedRow},
+        Object.assign(new Row(), {cells: firstMarkedRow}),
+        Object.assign(new Row(), {cells: firstMarkedRow}),
+        Object.assign(new Row(), {cells: firstMarkedRow}),
       ]
     },
     {
       name: 'middle',
       data: [
-        {cells: midMarkedRow},
-        {cells: midMarkedRow},
-        {cells: midMarkedRow},
+        Object.assign(new Row(), {cells: midMarkedRow}),
+        Object.assign(new Row(), {cells: midMarkedRow}),
+        Object.assign(new Row(), {cells: midMarkedRow}),
       ]
     },
     {
       name: 'last',
       data: [
-        {cells: lastMarkedRow},
-        {cells: lastMarkedRow},
-        {cells: lastMarkedRow},
+        Object.assign(new Row(), {cells: lastMarkedRow}),
+        Object.assign(new Row(), {cells: lastMarkedRow}),
+        Object.assign(new Row(), {cells: lastMarkedRow}),
       ]
     },
   ];
@@ -114,16 +115,16 @@ describe('GameService', () => {
     {
       name: 'downward',
       data: [
-        {cells: firstMarkedRow},
-        {cells: midMarkedRow},
-        {cells: lastMarkedRow}
+        Object.assign(new Row(), {cells: firstMarkedRow}),
+        Object.assign(new Row(), {cells: midMarkedRow}),
+        Object.assign(new Row(), {cells: lastMarkedRow})
       ]
     }, {
       name: 'upward',
       data: [
-        {cells: lastMarkedRow},
-        {cells: midMarkedRow},
-        {cells: firstMarkedRow}
+        Object.assign(new Row(), {cells: lastMarkedRow}),
+        Object.assign(new Row(), {cells: midMarkedRow}),
+        Object.assign(new Row(), {cells: firstMarkedRow})
       ]
     }
   ];
