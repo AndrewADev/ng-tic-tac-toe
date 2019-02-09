@@ -8,7 +8,11 @@ import { PlayerTurnService } from './player-turn.service';
   providedIn: 'root'
 })
 export class GameService {
-  rows = [];
+  rows = [
+    new Row(),
+    new Row(),
+    new Row()
+  ];
   private mode: GameMode = GameMode.LOBBY;
 
   constructor(public turnService: PlayerTurnService) {

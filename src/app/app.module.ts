@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { CellComponent } from './cell/cell.component';
 import { CellRowComponent } from './cell-row/cell-row.component';
 import { GameService } from './game.service';
-import { GameServiceStub } from '../testing/game-service.stub';
 import { CellGridComponent } from './cell-grid/cell-grid.component';
 import { PlayerTurnService } from './player-turn.service';
 import { GameStatusDashboardComponent } from './game-status-dashboard/game-status-dashboard.component';
@@ -22,8 +21,8 @@ import { GameStatusDashboardComponent } from './game-status-dashboard/game-statu
     BrowserModule
   ],
   providers: [
-    {provide: GameService, useValue: new GameServiceStub()},
-    {provide: PlayerTurnService, useValue: new PlayerTurnService()}
+    GameService,
+    PlayerTurnService
   ],
   bootstrap: [AppComponent]
 })
