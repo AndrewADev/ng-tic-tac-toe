@@ -5,7 +5,7 @@ import { Mark } from '../shared/mark';
 import { Row } from './row';
 
 describe('CellRowComponent', () => {
-  let sut;
+  let sut: Row;
 
   beforeEach(() => {
     sut = new Row();
@@ -27,21 +27,31 @@ describe('CellRowComponent', () => {
     sut.cells = [
       oCell,
       xCell,
-      {...oCell}
+      Object.assign(oCell)
     ];
     expect(sut.hasWinCondition).toBeFalsy();
   });
 
-  it('should detect row win condition', () => {
-    const cell = new Cell();
-    cell.mark = Mark.O;
+  const markTypes = [
+    {
+      data: Mark.O
+    },
+    {
+      data: Mark.X
+    }
+  ];
+  markTypes.forEach( type => {
+    it(`should detect row win condition (Mark val ${type.data})`, () => {
+      const cell = new Cell();
+      cell.mark = type.data;
 
-    sut.cells = [
-      cell,
-      Object.assign(cell, {mark: Mark.O}),
-      Object.assign(cell, {mark: Mark.O})
-    ];
+      sut.cells = [
+        cell,
+        Object.assign(cell, {mark: type.data}),
+        Object.assign(cell, {mark: type.data})
+      ];
 
-    expect(sut.hasWinCondition).toBeTruthy();
+      expect(sut.hasWinCondition).toBeTruthy();
+    });
   });
 });

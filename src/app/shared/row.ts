@@ -6,7 +6,7 @@ export class Row {
     // FIXME: this should be dynamic
     cells = [new Cell(), new Cell(), new Cell()];
 
-    get hasWinCondition(): Boolean {
+    get hasWinCondition(): boolean {
         if (!this.cells || this.cells.length < 1) {
             return false;
         }
@@ -14,9 +14,9 @@ export class Row {
             && this.allCellsHaveSameTruthyMark;
     }
 
-    private get allCellsHaveSameTruthyMark(): Boolean {
-        if (!this.cells[0] || !this.cells[0].mark) { return false; }
+    private get allCellsHaveSameTruthyMark(): boolean {
+        if (!this.cells[0] || !this.cells[0].hasMark) { return false; }
         const firstMark = this.cells[0].mark;
-        return this.cells.every( cell => cell.mark && cell.mark.valueOf() === firstMark.valueOf());
+        return this.cells.every( cell => cell.hasMark && cell.mark.valueOf() === firstMark.valueOf());
     }
 }

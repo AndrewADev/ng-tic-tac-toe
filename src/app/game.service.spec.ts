@@ -15,7 +15,7 @@ describe('GameService', () => {
   const markedCell = new Cell();
 
   beforeEach(() => {
-    markedCell.mark = Mark.O;
+    markedCell.mark = Mark.X;
     TestBed.configureTestingModule({
       providers: [
         GameService,
@@ -49,7 +49,7 @@ describe('GameService', () => {
   }));
 
   const winningRow = TypeMoq.Mock.ofType<Row>();
-  winningRow.setup(x => x.hasWinCondition).returns((): Boolean => true);
+  winningRow.setup(x => x.hasWinCondition).returns((): boolean => true);
 
   it('should end game when win condition detected', inject([GameService], (service: GameService) => {
     service.rows = [
@@ -71,6 +71,40 @@ describe('GameService', () => {
     ];
     sut.checkForWinConditions();
     expect(mockPlayerTurnService.endGame).toHaveBeenCalled();
+  });
+
+  const rowCases = [
+    {
+      name: 'First row',
+      data: [
+        winningRow.object,
+        new Row(),
+        new Row(),
+      ]
+    },
+    {
+      name: 'Second row',
+      data: [
+        new Row(),
+        winningRow.object,
+        new Row(),
+      ]
+    },
+    {
+      name: 'Third row',
+      data: [
+        new Row(),
+        new Row(),
+        winningRow.object,
+      ]
+    }
+  ];
+  rowCases.forEach(testCase => {
+    it(`should detect row win condition (${testCase.name})`, inject([GameService], (service: GameService) => {
+      service.rows = testCase.data;
+      service.checkForWinConditions();
+      expect(service.hasGameEnded).toBeTruthy();
+    }));
   });
 
   const firstMarkedRow = [ markedCell, new Cell(), new Cell()];

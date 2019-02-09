@@ -43,7 +43,7 @@ export class GameService {
     for (let i = 0; i <= maxIdx; i++) {
       if (!this.rows[0] || !this.rows[0].cells[i]) { break; }
       const initialMark = this.rows[0].cells[i].mark;
-      if (this.rows.every(row => row && row.cells[i].mark && row.cells[i].mark.valueOf() === initialMark.valueOf())) {
+      if (this.rows.every(row => row && row.cells[i].hasMark && row.cells[i].mark.valueOf() === initialMark.valueOf())) {
         return true;
       }
     }
@@ -81,7 +81,7 @@ export class GameService {
         );
   }
 
-  private get hasRowWinCondition(): Boolean {
-    return this.rows.reduce((accum, row) => accum || row.hasWinCondition, false);
+  private get hasRowWinCondition(): boolean {
+    return this.rows.some(row => row.hasWinCondition);
   }
 }
