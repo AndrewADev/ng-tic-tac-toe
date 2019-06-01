@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+
 import { AppComponent } from './app.component';
 import { CellComponent } from './cell/cell.component';
 import { CellRowComponent } from './cell-row/cell-row.component';
@@ -18,7 +22,10 @@ import { GameStatusDashboardComponent } from './game-status-dashboard/game-statu
     GameStatusDashboardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatDividerModule,
   ],
   providers: [
     GameService,
