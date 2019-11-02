@@ -6,8 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:8-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -34,4 +33,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm run test
+      - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
+      # TODO: enable when e2e tests ready
+      # - run: npm run e2e -- --protractor-config=./e2e/protractor-config-ci.conf.js
