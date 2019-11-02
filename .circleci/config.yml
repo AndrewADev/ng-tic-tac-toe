@@ -35,4 +35,4 @@ jobs:
       # run tests!
       - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
       # TODO: enable when e2e tests ready
-      # - run: npm run e2e -- --protractor-config=./e2e/protractor-config-ci.conf.js
+      - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js
