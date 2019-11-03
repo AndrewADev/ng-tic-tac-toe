@@ -1,13 +1,15 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
   <h1>
     Welcome to {{ title }}!
   </h1>
 </mat-toolbar>
-<mat-card>
-  <div class="container">
-    <app-cell-grid></app-cell-grid>
-  </div>
-  <div class="container">
-    <app-game-status-dashboard></app-game-status-dashboard>
-  </div>
+<mat-card >
+  <mat-card-content>
+    <div class="container">
+      <app-cell-grid></app-cell-grid>
+    </div>
+    <div class="container">
+      <app-game-status-dashboard></app-game-status-dashboard>
+    </div>
+  </mat-card-content>
 </mat-card>
