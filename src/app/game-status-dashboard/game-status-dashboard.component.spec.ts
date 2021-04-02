@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameStatusDashboardComponent } from './game-status-dashboard.component';
 import { GameService } from '../game.service';
@@ -10,7 +10,7 @@ describe('GameStatusDashboardComponent', () => {
   let fixture: ComponentFixture<GameStatusDashboardComponent>;
   const gameServiceMock = new GameServiceStub();
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GameStatusDashboardComponent ],
       providers: [{provide: GameService, useValue: gameServiceMock}]

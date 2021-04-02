@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CellRowComponent } from './cell-row.component';
 import { CellComponent } from '../cell/cell.component';
@@ -24,7 +24,7 @@ describe('CellRowComponent', () => {
   const gameServiceStub = new GameServiceStub();
   let cellEls;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         CellComponent,

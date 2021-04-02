@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CellGridComponent } from './cell-grid.component';
 import { By } from '@angular/platform-browser';
@@ -13,7 +13,7 @@ describe('CellGridComponent', () => {
   let fixture: ComponentFixture<CellGridComponent>;
   let rowEls;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         CellComponent,
