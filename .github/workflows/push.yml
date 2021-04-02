@@ -14,5 +14,4 @@ jobs:
       - run: npm install
       - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
       - run: npm run lint
-      # Currently failing for reasons of protractor/webdriver
-      # - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js
+      - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js
