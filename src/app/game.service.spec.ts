@@ -8,13 +8,14 @@ import { PlayerTurnService } from './player-turn.service';
 import { Mark } from './shared/mark';
 
 describe('GameService', () => {
-  const mockPlayerTurnService = {
-    addTurnChangeCallback( callback ) {},
-    endGame() {},
-  };
+  let mockPlayerTurnService;
   const markedCell = new Cell();
 
   beforeEach(() => {
+    mockPlayerTurnService = {
+      addTurnChangeCallback: ( callback ) => {},
+      endGame: () => {},
+    };
     markedCell.mark = Mark.X;
     TestBed.configureTestingModule({
       providers: [
