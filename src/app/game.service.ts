@@ -28,7 +28,7 @@ export class GameService {
       this.mode = GameMode.ENDED;
       this.turnService.endGame();
     }
-  }
+  };
 
   get boardDimension(): Number {
     return this.rows[0] && this.rows[0].cells ? this.rows[0].cells.length : 0;

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 
 import { CellComponent } from './cell.component';
 import { DebugElement, Component } from '@angular/core';
@@ -23,7 +23,7 @@ describe('CellComponent', () => {
   let endTurnSpy;
   let playerTurnService;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CellComponent ],
       providers: [ PlayerTurnService ],
