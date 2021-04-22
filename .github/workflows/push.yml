@@ -3,8 +3,19 @@ on:
   - push
 
 jobs:
-  run_tests:
-    name: "Run tests"
+  run_lint:
+    name: "Run lint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "12"
+      - run: npm install
+      - run: npm run lint
+
+  run_unit:
+    name: "Run unit tests"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,6 +24,15 @@ jobs:
           node-version: "12"
       - run: npm install
       - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
-      - run: npm run lint
+
+  run_tests:
+    name: "Run e2e tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "12"
+      - run: npm install
       - run: npm run postinstall
       - run: npm run e2e -- --protractor-config=./e2e/protractor-ci.conf.js
