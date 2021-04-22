@@ -7,8 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "test:single": "ng test -- --watch=false --browsers=ChromeHeadlessCI",
+    "postinstall": "webdriver-manager update --versions.chrome 89.0.4389.114 --gecko=false",
     "lint": "ng lint ngTicTacToe",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e -- --webdriver-update=false"
   },
   "private": true,
   "dependencies": {
