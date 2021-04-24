@@ -11,6 +11,8 @@ export class GameServiceStub {
         return 3;
     }
 
+    reset() { this.active = true; }
+
     get hasGameEnded() { return !this.active; }
 
     toggleGameActive() { this.active = !this.active; }
