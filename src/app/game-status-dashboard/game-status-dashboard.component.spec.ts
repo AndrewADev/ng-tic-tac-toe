@@ -21,6 +21,7 @@ describe('GameStatusDashboardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GameStatusDashboardComponent);
     component = fixture.componentInstance;
+    gameServiceMock.reset();
     fixture.detectChanges();
   });
 
